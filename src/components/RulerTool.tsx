@@ -650,7 +650,7 @@ export default function RulerTool({ calibration, onOpenCalibration, onOpenRealRu
                 Try the Immersive Full-Screen Edge Ruler Overlay
               </strong>
               <p className="text-xs text-blue-100 opacity-90 mt-1 leading-relaxed max-w-xl">
-                Exact replica of <span className="underline font-bold decoration-amber-350 decoration-2">realonlineruler.com</span>. Toggles rulers along all four screen edges, featuring click-to-drop draggable guides, pointer-crosshair coordinates tracker, and convenient keyboard shortcuts.
+                Advanced virtual edge calibration. Toggles rulers along all four screen edges, featuring click-to-drop draggable guides, pointer-crosshair coordinates tracker, and convenient keyboard shortcuts.
               </p>
             </div>
           </div>
