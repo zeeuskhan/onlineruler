@@ -1,0 +1,6 @@
+{
+  "name": "Superior Online Ruler Tool",
+  "description": "The world's most accurate, accessible, and feature-complete virtual screen ruler. Calibrate your screen with smart widgets and access a full suite: cm/mm/inch rulers, an interactive protractor, ring sizer, adjustable web grid, instant unit converter, and scale-accurate printable PDFs.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
