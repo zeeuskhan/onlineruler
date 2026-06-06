@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Rounded canvas background -->
+  <rect width="32" height="32" rx="7" fill="#4f46e5"/>
+  
+  <!-- Highlight overlay to add depth -->
+  <path d="M0 7C0 3.13401 3.13401 0 7 0H25C28.866 0 32 3.13401 32 7V16L0 32V7Z" fill="white" fill-opacity="0.08"/>
+  
+  <!-- Dark ruler body centering -->
+  <rect x="4" y="11" width="24" height="10" rx="2" fill="#18181b" stroke="#312e81" stroke-width="1"/>
+  
+  <!-- Metric Tick Marks -->
+  <!-- Long main ruler markers (inches / key metrics) with active color -->
+  <rect x="7" y="11" width="1.5" height="4.5" rx="0.5" fill="#f97316"/>
+  <rect x="13" y="11" width="1.2" height="3.5" rx="0.5" fill="#38bdf8"/>
+  <rect x="19" y="11" width="1.5" height="4.5" rx="0.5" fill="#f97316"/>
+  <rect x="25" y="11" width="1.2" height="3.5" rx="0.5" fill="#38bdf8"/>
+  
+  <!-- Smaller metric ticks -->
+  <rect x="10" y="11" width="1" height="2.5" rx="0.3" fill="#cbcbcb"/>
+  <rect x="16" y="11" width="1" height="2.5" rx="0.3" fill="#cbcbcb"/>
+  <rect x="22" y="11" width="1" height="2.5" rx="0.3" fill="#cbcbcb"/>
+  
+  <!-- Subtle label mimicking 'cm' text -->
+  <path d="M22 17.5C21.5 17.5 21 18 21 18.5C21 19 21.5 19.5 22 19.5" stroke="#cbcbcb" stroke-width="0.8" stroke-linecap="round"/>
+  <path d="M23.5 17.5V19.5M23.5 18C23.8 17.5 24.3 17.5 24.5 17.8C24.8 17.5 25.3 17.5 25.5 18V19.5" stroke="#cbcbcb" stroke-width="0.8" stroke-linecap="round"/>
+</svg>

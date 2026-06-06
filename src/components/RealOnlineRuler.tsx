@@ -37,7 +37,6 @@ export default function RealOnlineRuler({
   calibration, 
   onCalibrationChange 
 }: RealOnlineRulerProps) {
-  if (!isOpen) return null;
 
   // Viewport dimensions
   const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight });
@@ -610,6 +609,8 @@ export default function RealOnlineRuler({
       d.name.toLowerCase().includes(deviceSearch.toLowerCase())
     );
   }, [deviceSearch]);
+
+  if (!isOpen) return null;
 
   return (
     <div 

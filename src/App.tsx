@@ -19,7 +19,20 @@ import GuidesHub from './components/GuidesHub';
 import RealOnlineRuler from './components/RealOnlineRuler';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ToolMode>('ruler');
+  // Load active tab from URL search parameters on load for deep-linking SEO improvements
+  const [activeTab, setActiveTab] = useState<ToolMode>(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const tool = params.get('tool');
+      const validTools = ['ruler', 'protractor', 'ring-size', 'grid', 'unit-converter', 'printable', 'guides'];
+      if (tool && validTools.includes(tool)) {
+        return tool as ToolMode;
+      }
+    } catch (e) {
+      console.warn('URL parameter reading is restricted.', e);
+    }
+    return 'ruler';
+  });
   const [isDark, setIsDark] = useState<boolean>(false);
   const [showCalibrationDrawer, setShowCalibrationDrawer] = useState<boolean>(false);
   const [showFullRuler, setShowFullRuler] = useState<boolean>(false);
@@ -51,6 +64,19 @@ export default function App() {
       method: 'default',
     };
   });
+
+  // Synchronize active tab with URL search parameter for deep-linking
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      if (url.searchParams.get('tool') !== activeTab) {
+        url.searchParams.set('tool', activeTab);
+        window.history.replaceState({ ...window.history.state }, '', url.toString());
+      }
+    } catch (e) {
+      console.warn('Cannot update search parameter.', e);
+    }
+  }, [activeTab]);
 
   // Watch for system theme modes on initial mount
   useEffect(() => {
