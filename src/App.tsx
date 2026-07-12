@@ -17,6 +17,7 @@ import UnitConverterTool from './components/UnitConverterTool';
 import PrintableRulerTool from './components/PrintableRulerTool';
 import GuidesHub from './components/GuidesHub';
 import RealOnlineRuler from './components/RealOnlineRuler';
+import AdBanner from './components/AdBanner';
 
 export default function App() {
   // Load active tab from URL search parameters on load for deep-linking SEO improvements
@@ -224,6 +225,9 @@ export default function App() {
         {/* MAIN BODY LAYOUT INTERACTIVE DECKS */}
         <main className="max-w-7xl mx-auto w-full px-4 lg:px-6 py-6 lg:py-8 flex-1 space-y-8">
           
+          {/* Header Ad Banner (728x90) */}
+          <AdBanner adKey="6b6777c4248ba9b31f1a7f8087ca4b49" format="iframe" height={90} width={728} />
+          
           {/* Main Tab Deck Header Bar Selection */}
           <div className="overflow-x-auto select-none no-scrollbar border-b border-zinc-200 dark:border-zinc-800">
             <div className="flex gap-1.5 min-w-[650px] pb-1">
@@ -410,6 +414,9 @@ export default function App() {
             </div>
 
           </div>
+
+          {/* Footer Ad Banner (468x60) */}
+          <AdBanner adKey="68e74af62003701085edf5c2422fb9f7" format="iframe" height={60} width={468} />
 
           <div className="max-w-7xl mx-auto px-4 lg:px-6 pt-8 mt-8 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-zinc-400 font-medium uppercase tracking-widest">
             <span>© 2026 Virtual Ruler suite • Murata Design Inc.</span>
