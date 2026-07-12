@@ -6,6 +6,48 @@
     <title>Accurate Screen Ruler — RuleScale Virtual Online Measuring Tool</title>
     <meta name="google-site-verification" content="ItLByOSQAwzJ0a_YDS2lb1-6swGae5hQRnJUr4TuShg" />
     
+    <script>
+      // Suppress benign third-party ad script errors (cross-origin Script errors)
+      // to prevent iframe sandboxing restrictions from causing fatal error banners in the development environment.
+      (function() {
+        var originalOnError = window.onerror;
+        window.onerror = function(message, source, lineno, colno, error) {
+          if (
+            message === 'Script error.' ||
+            message === 'Script error' ||
+            (source && source.indexOf('endedstrung.com') !== -1) ||
+            (error && error.stack && error.stack.indexOf('endedstrung.com') !== -1)
+          ) {
+            console.warn('Suppressed third-party script error from ad network:', message);
+            return true;
+          }
+          if (originalOnError) {
+            return originalOnError.apply(this, arguments);
+          }
+          return false;
+        };
+
+        window.addEventListener('error', function(e) {
+          if (
+            e.message === 'Script error.' ||
+            e.message === 'Script error' ||
+            (e.filename && e.filename.indexOf('endedstrung.com') !== -1) ||
+            (e.error && e.error.stack && e.error.stack.indexOf('endedstrung.com') !== -1)
+          ) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(e) {
+          if (e.reason && e.reason.stack && e.reason.stack.indexOf('endedstrung.com') !== -1) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+    
     <!-- Meta tags for improved SEO and search engine ranking -->
     <meta name="description" content="Use RuleScale, the most accurate virtual screen ruler. Calibrate dynamically using a standard card or coin. Features full measure suite in cm, mm, inch, and px, interactable 360-degree protractor, ring sizer chart, web grid overlay, unit converter, and scale-accurate printable PDFs." />
     <meta name="keywords" content="online ruler, screen ruler, screen scale, virtual ruler, measure in cm, mm ruler, inch ruler, protractor online, ring sizer tool, printable ruler pdf, pixel grid" />

@@ -16,36 +16,59 @@ export default function AdBanner({ adKey, format, height, width }: AdBannerProps
     // Clear any stale ad container content
     containerRef.current.innerHTML = '';
 
-    // Create container element
-    const wrapper = document.createElement('div');
-    wrapper.style.display = 'inline-block';
-    wrapper.style.width = `${width}px`;
-    wrapper.style.height = `${height}px`;
+    // Create a fully isolated iframe to encapsulate cross-origin script errors
+    const iframe = document.createElement('iframe');
+    iframe.style.width = `${width}px`;
+    iframe.style.height = `${height}px`;
+    iframe.style.border = 'none';
+    iframe.style.overflow = 'hidden';
+    iframe.scrolling = 'no';
+    
+    // Append the iframe first
+    containerRef.current.appendChild(iframe);
 
-    // 1. Script for setting atOptions
-    const configScript = document.createElement('script');
-    configScript.type = 'text/javascript';
-    configScript.innerHTML = `
-      var atOptions = {
-        'key' : '${adKey}',
-        'format' : '${format}',
-        'height' : ${height},
-        'width' : ${width},
-        'params' : {}
-      };
-    `;
-
-    // 2. Script for loading invoke.js
-    const loadScript = document.createElement('script');
-    loadScript.type = 'text/javascript';
-    loadScript.src = `https://endedstrung.com/${adKey}/invoke.js`;
-
-    // Append both scripts to the wrapper
-    wrapper.appendChild(configScript);
-    wrapper.appendChild(loadScript);
-
-    // Append wrapper to the container
-    containerRef.current.appendChild(wrapper);
+    // Write the ad scripts inside the iframe document context
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+    if (iframeDoc) {
+      iframeDoc.open();
+      iframeDoc.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              html, body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: transparent;
+              }
+            </style>
+          </head>
+          <body>
+            <div id="ad-container"></div>
+            <script type="text/javascript">
+              var atOptions = {
+                'key' : '${adKey}',
+                'format' : '${format}',
+                'height' : ${height},
+                'width' : ${width},
+                'params' : {}
+              };
+              
+              // Handle and ignore internal script errors within this iframe
+              window.onerror = function() { return true; };
+            </script>
+            <script type="text/javascript" src="https://endedstrung.com/${adKey}/invoke.js"></script>
+          </body>
+        </html>
+      `);
+      iframeDoc.close();
+    }
 
     return () => {
       if (containerRef.current) {
