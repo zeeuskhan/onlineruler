@@ -18,19 +18,28 @@ import PrintableRulerTool from './components/PrintableRulerTool';
 import GuidesHub from './components/GuidesHub';
 import RealOnlineRuler from './components/RealOnlineRuler';
 import AdBanner from './components/AdBanner';
+import SEOContent from './components/SEOContent';
+
+function getToolFromPath(pathname: string): ToolMode {
+  const p = pathname.toLowerCase();
+  if (p === '/protractor') return 'protractor';
+  if (p === '/ring-size') return 'ring-size';
+  if (p === '/grid') return 'grid';
+  if (p === '/unit-converter') return 'unit-converter';
+  if (p === '/printable') return 'printable';
+  if (p === '/guides') return 'guides';
+  return 'ruler';
+}
 
 export default function App() {
-  // Load active tab from URL search parameters on load for deep-linking SEO improvements
+  // Load active tab from URL path for modern SEO clean routing
   const [activeTab, setActiveTab] = useState<ToolMode>(() => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const tool = params.get('tool');
-      const validTools = ['ruler', 'protractor', 'ring-size', 'grid', 'unit-converter', 'printable', 'guides'];
-      if (tool && validTools.includes(tool)) {
-        return tool as ToolMode;
+      if (typeof window !== 'undefined') {
+        return getToolFromPath(window.location.pathname);
       }
     } catch (e) {
-      console.warn('URL parameter reading is restricted.', e);
+      console.warn('URL pathname reading is restricted.', e);
     }
     return 'ruler';
   });
@@ -66,18 +75,50 @@ export default function App() {
     };
   });
 
-  // Synchronize active tab with URL search parameter for deep-linking
+  // Synchronize active tab with URL path for clean search-friendly URLs
   useEffect(() => {
     try {
-      const url = new URL(window.location.href);
-      if (url.searchParams.get('tool') !== activeTab) {
-        url.searchParams.set('tool', activeTab);
-        window.history.replaceState({ ...window.history.state }, '', url.toString());
+      const targetPath = activeTab === 'ruler' ? '/' : `/${activeTab}`;
+      if (window.location.pathname !== targetPath) {
+        const url = new URL(window.location.href);
+        url.pathname = targetPath;
+        // Strip the old 'tool' search parameter to migrate cleanly to paths
+        url.searchParams.delete('tool');
+        window.history.pushState({ tool: activeTab }, '', url.toString());
       }
     } catch (e) {
-      console.warn('Cannot update search parameter.', e);
+      console.warn('Cannot update URL path.', e);
     }
   }, [activeTab]);
+
+  // Support back/forward browser history navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      setActiveTab(getToolFromPath(window.location.pathname));
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Handle 301 Client-Side Redirect from old query parameter URLs (?tool=xxx)
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const oldTool = params.get('tool');
+      if (oldTool) {
+        const validTools = ['ruler', 'protractor', 'ring-size', 'grid', 'unit-converter', 'printable', 'guides'];
+        if (validTools.includes(oldTool)) {
+          const targetPath = oldTool === 'ruler' ? '/' : `/${oldTool}`;
+          const url = new URL(window.location.href);
+          url.pathname = targetPath;
+          url.searchParams.delete('tool');
+          window.location.replace(url.toString());
+        }
+      }
+    } catch (e) {
+      console.warn('Legacy query redirect failed.', e);
+    }
+  }, []);
 
   // Watch for system theme modes on initial mount
   useEffect(() => {
@@ -299,6 +340,9 @@ export default function App() {
               <GuidesHub />
             )}
           </section>
+
+          {/* Core Crawlable SEO & FAQ content below the interactive measuring utilities */}
+          <SEOContent activeTab={activeTab} setActiveTab={setActiveTab} />
 
           {/* DYNAMIC CALIBRATION BANNER AT THE BOTTOM FOR QUICK ENGAGEMENT */}
           {!calibration.calibrated && !showCalibrationDrawer && (

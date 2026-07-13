@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Primary Landing Page -->
+  <!-- Primary Landing Page (Actual Size Ruler) -->
   <url>
     <loc>https://rulerscale.vercel.app/</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- Screen Ruler Tool -->
+  <!-- Screen Ruler Alias -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=ruler</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/ruler</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <!-- Interactive Angle Protractor Tool -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=protractor</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/protractor</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Ring Sizer Chart Tool -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=ring-size</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/ring-size</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Creative Web Grid Tool -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=grid</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/grid</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Instant Converter Tool -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=unit-converter</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/unit-converter</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Scale Printable Ruler Tool -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=printable</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/printable</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- Guidelines and FAQ Hub -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=guides</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://rulerscale.vercel.app/guides</loc>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>
