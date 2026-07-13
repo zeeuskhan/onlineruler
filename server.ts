@@ -377,6 +377,30 @@ async function startServer() {
     app.use(express.static(distPath, { index: false }));
   }
 
+  // Explicitly serve robots.txt with correct Content-Type (text/plain)
+  app.get('/robots.txt', (req, res) => {
+    try {
+      const robotsPath = process.env.NODE_ENV !== 'production'
+        ? path.resolve(process.cwd(), 'public/robots.txt')
+        : path.resolve(process.cwd(), 'dist/robots.txt');
+      res.status(200).set({ 'Content-Type': 'text/plain' }).sendFile(robotsPath);
+    } catch (err) {
+      res.status(404).send('Not Found');
+    }
+  });
+
+  // Explicitly serve sitemap.xml with correct Content-Type (application/xml)
+  app.get('/sitemap.xml', (req, res) => {
+    try {
+      const sitemapPath = process.env.NODE_ENV !== 'production'
+        ? path.resolve(process.cwd(), 'public/sitemap.xml')
+        : path.resolve(process.cwd(), 'dist/sitemap.xml');
+      res.status(200).set({ 'Content-Type': 'application/xml' }).sendFile(sitemapPath);
+    } catch (err) {
+      res.status(404).send('Not Found');
+    }
+  });
+
   // Handle all core tool routes for SSR meta & on-page pre-rendering
   const cleanPaths = ['/', '/ruler', '/protractor', '/ring-size', '/grid', '/unit-converter', '/printable', '/guides'];
   
