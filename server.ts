@@ -322,12 +322,12 @@ function getSeoInjectedHtml(originalHtml: string, reqPath: string): string {
 
   // Replace Twitter Tags
   html = html.replace(
-    /<meta property="twitter:title" content=".*?" \/>/,
-    `<meta property="twitter:title" content="${pageData.title}" />`
+    /<meta name="twitter:title" content=".*?" \/>/,
+    `<meta name="twitter:title" content="${pageData.title}" />`
   );
   html = html.replace(
-    /<meta property="twitter:description" content=".*?" \/>/,
-    `<meta property="twitter:description" content="${pageData.description}" />`
+    /<meta name="twitter:description" content=".*?" \/>/,
+    `<meta name="twitter:description" content="${pageData.description}" />`
   );
 
   // Inject Schemas & visible pre-rendered body
