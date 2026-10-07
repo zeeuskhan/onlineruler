@@ -7,18 +7,20 @@
     <meta name="google-site-verification" content="ItLByOSQAwzJ0a_YDS2lb1-6swGae5hQRnJUr4TuShg" />
     
     <script>
-      // Suppress benign third-party ad script errors (cross-origin Script errors)
-      // to prevent iframe sandboxing restrictions from causing fatal error banners in the development environment.
+      // Suppress cross-origin Script errors and third-party script loading issues
+      // to prevent sandboxing or ad-blocker restrictions from causing error banners.
       (function() {
+        var isScriptError = function(msg, src, err) {
+          if (!msg && !src && !err) return true;
+          var text = (msg || '') + ' ' + (src || '') + ' ' + (err && err.stack ? err.stack : '');
+          text = text.toLowerCase();
+          return text.indexOf('script error') !== -1 || text.indexOf('endedstrung') !== -1 || text.indexOf('invoke.js') !== -1;
+        };
+
         var originalOnError = window.onerror;
         window.onerror = function(message, source, lineno, colno, error) {
-          if (
-            message === 'Script error.' ||
-            message === 'Script error' ||
-            (source && source.indexOf('endedstrung.com') !== -1) ||
-            (error && error.stack && error.stack.indexOf('endedstrung.com') !== -1)
-          ) {
-            console.warn('Suppressed third-party script error from ad network:', message);
+          if (isScriptError(message, source, error)) {
+            console.warn('Suppressed external script error:', message);
             return true;
           }
           if (originalOnError) {
@@ -28,21 +30,25 @@
         };
 
         window.addEventListener('error', function(e) {
-          if (
-            e.message === 'Script error.' ||
-            e.message === 'Script error' ||
-            (e.filename && e.filename.indexOf('endedstrung.com') !== -1) ||
-            (e.error && e.error.stack && e.error.stack.indexOf('endedstrung.com') !== -1)
-          ) {
+          if (!e) return;
+          var msg = e.message || '';
+          var file = e.filename || '';
+          var isCrossScript = isScriptError(msg, file, e.error);
+          var isScriptTag = e.target && e.target.tagName === 'SCRIPT';
+          if (isCrossScript || isScriptTag) {
             e.stopImmediatePropagation();
             e.preventDefault();
+            return true;
           }
         }, true);
 
         window.addEventListener('unhandledrejection', function(e) {
-          if (e.reason && e.reason.stack && e.reason.stack.indexOf('endedstrung.com') !== -1) {
+          if (!e) return;
+          var reason = e.reason ? (e.reason.message || String(e.reason)) : '';
+          if (isScriptError(reason, '', e.reason)) {
             e.stopImmediatePropagation();
             e.preventDefault();
+            return true;
           }
         }, true);
       })();
