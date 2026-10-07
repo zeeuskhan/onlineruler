@@ -18,6 +18,7 @@ import PrintableRulerTool from './components/PrintableRulerTool';
 import GuidesHub from './components/GuidesHub';
 import RealOnlineRuler from './components/RealOnlineRuler';
 import AdBanner from './components/AdBanner';
+import SeoContentSection from './components/SeoContentSection';
 
 export default function App() {
   // Load active tab from URL search parameters on load for deep-linking SEO improvements
@@ -328,6 +329,15 @@ export default function App() {
             </div>
           )}
 
+          {/* COMPREHENSIVE SEO & MEASURING CAPABILITIES SECTION */}
+          <SeoContentSection
+            onOpenCalibration={() => {
+              setShowCalibrationDrawer(true);
+              document.getElementById('calibration-card')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            onOpenRealRuler={() => setShowFullRuler(true)}
+          />
+
         </main>
 
         {/* POLISHED LANDING PAGE FOOTER WITH RICH SEARCH WORDS & METRICS */}
@@ -340,14 +350,40 @@ export default function App() {
                 <div className="w-7 h-7 bg-indigo-50 dark:bg-indigo-950 rounded flex items-center justify-center text-indigo-650 dark:text-indigo-400">
                   <Ruler className="w-4 h-4 stroke-[2.5]" />
                 </div>
-                <strong className="text-sm font-extrabold text-zinc-900 dark:text-zinc-50">Virtual Ruler Tool Suite</strong>
+                <strong className="text-sm font-extrabold text-zinc-900 dark:text-zinc-50">Online Ruler &amp; Screen Measure Suite</strong>
               </div>
               <p className="text-zinc-400 text-[11px] leading-relaxed max-w-sm">
-                Built to outperform classical options: provides extreme physical accuracy backboards calibrated directly against display physical densities. Zero ads, instant access, sub-100KB initial asset footprint, 100% vector scaling print layouts.
+                Built to outperform classical physical measuring tools: provides extreme physical accuracy backboards calibrated directly against display physical densities. Zero ads, instant access, sub-100KB initial asset footprint, 100% vector scaling print layouts.
               </p>
               <div className="text-[10px] text-zinc-400 font-mono">
                 <span>Active Scale Identifier: </span>
                 <strong className="text-indigo-600 dark:text-indigo-400">{calibration.ppi} DPI Resolution Mode</strong>
+              </div>
+
+              {/* Target SEO Keywords quick tags */}
+              <div className="pt-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1.5">
+                  Target Measuring Capabilities:
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    'Online Ruler',
+                    'Screen Measure',
+                    'Accurate Ruler',
+                    'Virtual Ruler',
+                    'Screen Ruler',
+                    'Ruler Online',
+                    'Measurer Online',
+                    'Internet Ruler',
+                  ].map((kw) => (
+                    <span
+                      key={kw}
+                      className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-[10px] font-semibold"
+                    >
+                      {kw}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>            {/* Column B: Tool index */}
             <div className="md:col-span-3 space-y-2.5">

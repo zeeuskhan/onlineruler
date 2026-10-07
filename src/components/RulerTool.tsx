@@ -677,6 +677,16 @@ export default function RulerTool({ calibration, onOpenCalibration, onOpenRealRu
         </div>
       </div>
 
+      {/* Semantic Page Header for SEO & Clarity */}
+      <div className="max-w-4xl mx-auto text-center sm:text-left space-y-1">
+        <h1 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-zinc-50 tracking-tight">
+          Accurate Screen Ruler &amp; Online Measurer
+        </h1>
+        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+          Precision virtual ruler and screen measure tool calibrated to 100% actual size in cm, mm, and inches.
+        </p>
+      </div>
+
       {/* Primary Ruler Action Dashboard */}
       <div className="max-w-4xl mx-auto bg-white dark:bg-zinc-900 p-5 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xs space-y-4 select-none">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
