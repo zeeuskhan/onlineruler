@@ -59,6 +59,9 @@
     <meta name="keywords" content="measurer online, screen measure, accurate ruler, online ruler, screen ruler, virtual ruler, ruler online, internet ruler, actual size ruler, mm ruler, cm ruler, inch ruler, screen ruler cm, calibrate online ruler" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://rulerscale.vercel.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://rulerscale.vercel.app/" />
+    <link rel="alternate" hreflang="en" href="https://rulerscale.vercel.app/" />
+    <link rel="alternate" hreflang="hi" href="https://rulerscale.vercel.app/#hi" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://rulerscale.vercel.app/sitemap.xml" />
     
     <!-- Open Graph (Facebook / LinkedIn) -->
@@ -99,22 +102,30 @@
             "Internet Ruler"
           ],
           "url": "https://rulerscale.vercel.app/",
-          "description": "Free online ruler and accurate screen measure tool. Calibrate your screen ruler in cm, mm, and inches to actual size. Instant virtual ruler & measurer online.",
-          "applicationCategory": "UtilityApplication",
-          "operatingSystem": "All",
-          "browserRequirements": "Requires HTML5 Support and JavaScript",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "featureList": [
-            "Accurate screen ruler in cm, mm, inches, and px",
-            "Actual size calibration using a bank card or coin",
-            "Interactive calipers for precision screen measure",
-            "Dual-scale display for centimeters and 1/16th inches",
-            "360-degree angle protractor and ring sizer chart",
-            "Zero download internet ruler and online measurer"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://rulerscale.vercel.app/#website",
+          "url": "https://rulerscale.vercel.app/",
+          "name": "RuleScale - Online Ruler & Screen Measure",
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://rulerscale.vercel.app/#organization",
+            "name": "RuleScale & Murata Design",
+            "url": "https://rulerscale.vercel.app/",
+            "logo": "https://rulerscale.vercel.app/favicon.svg"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://rulerscale.vercel.app/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://rulerscale.vercel.app/"
+            }
           ]
         },
         {
@@ -160,6 +171,30 @@
     </script>
   </head>
   <body>
+    <noscript>
+      <div style="font-family: system-ui, -apple-system, sans-serif; padding: 2rem; max-width: 800px; margin: 0 auto; color: #222;">
+        <h1>Online Ruler — 100% Accurate Actual Size Screen Measure Tool</h1>
+        <p>RuleScale is a free online screen ruler providing 100% actual physical size measurements in inches, centimeters, and millimeters with credit card calibration.</p>
+        <h2>Measurement Spoke Landing Pages:</h2>
+        <ul>
+          <li><a href="/online-ruler-inches">Online Ruler in Inches (1/16th fractional subdivisions)</a></li>
+          <li><a href="/online-ruler-cm">Online Ruler in Centimeters (CM)</a></li>
+          <li><a href="/online-ruler-mm">Online Ruler in Millimeters (MM)</a></li>
+          <li><a href="/actual-size-ruler">Actual Size Ruler (Calibrated 1:1 scale)</a></li>
+          <li><a href="/camera-ruler">Online Ruler Camera (Measure with phone camera/webcam)</a></li>
+          <li><a href="/ruler-overlay">Full-Screen Ruler Overlay (4-edge viewport measurement)</a></li>
+          <li><a href="/screen-ruler">Screen Ruler (Interactive calipers & guidelines)</a></li>
+          <li><a href="/virtual-ruler">Virtual Ruler (Steel & wood theme digital instruments)</a></li>
+          <li><a href="/digital-ruler">Digital Ruler (Vernier digital readouts)</a></li>
+          <li><a href="/1-cm-on-screen">1 CM Visualised on Screen (Actual size centimeter guide)</a></li>
+          <li><a href="/1-inch-on-screen">1 Inch on Screen (Actual size inch guide)</a></li>
+          <li><a href="/ruler-for-phone">Ruler for Phone (Mobile touch screen ruler)</a></li>
+          <li><a href="/ruler-for-laptop">Computer Ruler for Laptop & Desktop Monitors</a></li>
+          <li><a href="/ruler-widget">Embeddable Ruler Widget for Webmasters</a></li>
+        </ul>
+        <p><em>Privacy Notice: All measurements and camera streams run 100% client-side on your device with zero server storage.</em></p>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

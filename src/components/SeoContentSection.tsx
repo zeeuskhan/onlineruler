@@ -4,21 +4,28 @@
  */
 
 import React, { useState } from 'react';
-import { Ruler, CheckCircle, ChevronDown, ChevronUp, Sparkles, Sliders, ShieldCheck, HelpCircle, Layers, ArrowRight, Laptop, Smartphone, Monitor } from 'lucide-react';
+import { 
+  Ruler, CheckCircle, ChevronDown, ChevronUp, Sparkles, Sliders, 
+  ShieldCheck, HelpCircle, Layers, ArrowRight, Laptop, Smartphone, 
+  Monitor, Calendar, UserCheck, AlertCircle 
+} from 'lucide-react';
+import { PageSeoConfig, E_E_A_T_AUTHOR } from '../seoData';
+import AdBanner from './AdBanner';
 
 interface SeoContentSectionProps {
   onOpenCalibration: () => void;
   onOpenRealRuler?: () => void;
+  config?: PageSeoConfig;
 }
 
-export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }: SeoContentSectionProps) {
+export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, config }: SeoContentSectionProps) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  const faqs = [
+  const defaultFaqs = [
     {
       q: 'How does an online ruler measure actual size on my screen?',
       a: 'A standard computer monitor or smartphone display consists of pixels per inch (PPI). Because screen resolutions and physical sizes vary across devices, an uncalibrated digital scale might show 1 inch smaller or larger than reality. RuleScale solves this by letting you calibrate with a standard bank card (85.60 mm) or coin. Once calibrated, our virtual ruler produces 100% true-to-scale physical millimeter, centimeter, and inch measurements on your glass display.'
@@ -45,6 +52,10 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }
     }
   ];
 
+  const activeFaqs = config?.faqs && config.faqs.length > 0
+    ? config.faqs.map(f => ({ q: f.question, a: f.answer }))
+    : defaultFaqs;
+
   return (
     <article className="max-w-4xl mx-auto space-y-10 text-zinc-700 dark:text-zinc-300 select-normal mt-6">
       
@@ -53,19 +64,19 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }
         <div className="flex flex-col gap-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 rounded-full text-xs font-bold w-fit">
             <Ruler className="w-3.5 h-3.5" />
-            <span>Accurate Ruler &amp; Screen Measure Guide</span>
+            <span>Target Intent: {config ? config.targetKeyword.toUpperCase() : 'ONLINE RULER & SCREEN MEASURE'}</span>
           </div>
 
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight leading-tight">
-            Accurate Screen Ruler &amp; Measurer Online (100% Actual Size)
+            {config ? config.h1 : 'Accurate Screen Ruler & Measurer Online (100% Actual Size)'}
           </h2>
 
           <p className="text-sm sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Welcome to <strong>RuleScale</strong>, the web&apos;s most reliable <strong>online ruler</strong> and <strong>screen measure</strong> tool. When you need to measure a physical object but don&apos;t have a tape measure handy, our <strong>virtual ruler</strong> transforms your laptop, desktop monitor, tablet, or smartphone screen into a calibrated, pinpoint-precise physical measuring scale.
-          </p>
-
-          <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Whether you&apos;re measuring hardware screws, rings, debit cards, packages, or digital artwork, our <strong>ruler online</strong> supports <strong>metric (centimeters &amp; millimeters)</strong>, <strong>imperial (inches with 1/16th fractional increments)</strong>, and <strong>screen pixels</strong>. Experience an <strong>internet ruler</strong> built from the ground up for extreme physical accuracy.
+            {config?.summary || (
+              <>
+                Welcome to <strong>RuleScale</strong>, the web&apos;s most reliable <strong>online ruler</strong> and <strong>screen measure</strong> tool. When you need to measure a physical object but don&apos;t have a tape measure handy, our <strong>virtual ruler</strong> transforms your laptop, desktop monitor, tablet, or smartphone screen into a calibrated, pinpoint-precise physical measuring scale.
+              </>
+            )}
           </p>
 
           {/* Key Advantages Grid */}
@@ -105,6 +116,24 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }
           </div>
         </div>
       </section>
+
+      {/* Dynamic Content Sections from Page Config (600-1000 words E-E-A-T depth) */}
+      {config?.contentSections && config.contentSections.length > 0 && (
+        <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+          {config.contentSections.map((sec, idx) => (
+            <div key={idx} className="space-y-2 border-b border-zinc-100 dark:border-zinc-800 pb-5 last:border-b-0 last:pb-0">
+              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+                {sec.heading}
+              </h3>
+              <div className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {sec.body.map((para, pIdx) => (
+                  <p key={pIdx}>{para}</p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* SECTION 2: How to Use the Measurer Online (Step-by-Step) */}
       <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
@@ -191,6 +220,12 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }
             </button>
           )}
         </div>
+      </section>
+
+      {/* SEO-SAFE IN-CONTENT AD SLOT (Fixed Height 90px to prevent CLS) */}
+      <section className="bg-zinc-50/50 dark:bg-zinc-900/40 rounded-2xl p-2 border border-dashed border-zinc-200 dark:border-zinc-800 text-center">
+        <span className="text-[9px] uppercase tracking-widest text-zinc-400 block font-mono mb-1">Sponsored Advertisement</span>
+        <AdBanner adKey="6b6777c4248ba9b31f1a7f8087ca4b49" format="iframe" height={90} width={728} />
       </section>
 
       {/* SECTION 3: Why Choose an Internet Ruler & Screen Ruler */}
@@ -371,23 +406,56 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }
         </div>
       </section>
 
-      {/* SECTION 6: Frequently Asked Questions (FAQ) Accordion */}
+      {/* SECTION 6: E-E-A-T Author & Publisher Trust Box */}
+      <section className="bg-zinc-50 dark:bg-zinc-850/60 border border-zinc-200 dark:border-zinc-750 rounded-3xl p-6 sm:p-7 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-zinc-200 dark:border-zinc-700">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">
+              MD
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-50">
+                Researched &amp; Verified by {E_E_A_T_AUTHOR.name}
+              </h4>
+              <span className="text-xs text-zinc-400">
+                {E_E_A_T_AUTHOR.role} • {E_E_A_T_AUTHOR.organization}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono">
+            <Calendar className="w-3.5 h-3.5" />
+            <span>Updated: {E_E_A_T_AUTHOR.updatedDate}</span>
+          </div>
+        </div>
+
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          {E_E_A_T_AUTHOR.experience}
+        </p>
+
+        <div className="p-3 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 text-[11px] text-zinc-500 dark:text-zinc-400 leading-snug flex items-start gap-2">
+          <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+          <span>{E_E_A_T_AUTHOR.accuracyDisclaimer}</span>
+        </div>
+      </section>
+
+      {/* SECTION 7: Frequently Asked Questions (FAQ) Accordion */}
       <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 rounded-full text-xs font-bold w-fit mb-2">
             <HelpCircle className="w-3.5 h-3.5" />
-            <span>SEO Questions &amp; Answers</span>
+            <span>People Also Ask &amp; SEO FAQs</span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
-            Frequently Asked Questions About Our Online Ruler &amp; Screen Measure
+            Frequently Asked Questions About {config ? config.targetKeyword : 'Online Ruler'}
           </h3>
           <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Everything you need to know about measuring accurately on screens:
+            Verified answers for users measuring on laptops, monitors, tablets, and phones:
           </p>
         </div>
 
         <div className="space-y-3">
-          {faqs.map((faq, index) => {
+          {activeFaqs.map((faq, index) => {
             const isOpen = openFaqIndex === index;
             return (
               <div
@@ -416,7 +484,7 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler }
         </div>
       </section>
 
-      {/* SECTION 7: Call to Action Bar */}
+      {/* SECTION 8: Call to Action Bar */}
       <section className="bg-gradient-to-r from-indigo-700 via-indigo-800 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-lg">
         <h3 className="text-lg sm:text-xl font-black tracking-tight text-white">
           Ready to Measure with Actual Size Precision?

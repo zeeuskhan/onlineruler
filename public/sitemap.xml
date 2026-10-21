@@ -1,59 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Primary Landing Page -->
+  <!-- Primary Hub Landing Page -->
   <url>
     <loc>https://rulerscale.vercel.app/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- Screen Ruler Tool -->
+  <!-- Inches Spoke -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=ruler</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/online-ruler-inches</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- Interactive Angle Protractor Tool -->
+  <!-- Centimeters Spoke -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=protractor</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/online-ruler-cm</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Millimeters Spoke -->
+  <url>
+    <loc>https://rulerscale.vercel.app/online-ruler-mm</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Actual Size Ruler Spoke -->
+  <url>
+    <loc>https://rulerscale.vercel.app/actual-size-ruler</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Screen Ruler Spoke -->
+  <url>
+    <loc>https://rulerscale.vercel.app/screen-ruler</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Camera Ruler Spoke (Targeting #10 Query) -->
+  <url>
+    <loc>https://rulerscale.vercel.app/camera-ruler</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Ruler Overlay Spoke (Targeting #10.5 Query) -->
+  <url>
+    <loc>https://rulerscale.vercel.app/ruler-overlay</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Virtual Ruler Spoke -->
+  <url>
+    <loc>https://rulerscale.vercel.app/virtual-ruler</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Ring Sizer Chart Tool -->
+  <!-- Digital Ruler Spoke -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=ring-size</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/digital-ruler</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Creative Web Grid Tool -->
+  <!-- 1 CM on Screen Reference Spoke -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=grid</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/1-cm-on-screen</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Instant Converter Tool -->
+  <!-- 1 Inch on Screen Reference Spoke -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=unit-converter</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/1-inch-on-screen</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Scale Printable Ruler Tool -->
+  <!-- Mobile Phone Ruler Spoke -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=printable</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/ruler-for-phone</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Guidelines and FAQ Hub -->
+  <!-- Computer & Laptop Ruler Spoke (Targeting #16 Query) -->
   <url>
-    <loc>https://rulerscale.vercel.app/?tool=guides</loc>
-    <lastmod>2026-10-07</lastmod>
+    <loc>https://rulerscale.vercel.app/ruler-for-laptop</loc>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <!-- Embeddable Widget Spoke -->
+  <url>
+    <loc>https://rulerscale.vercel.app/ruler-widget</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Trust Pages -->
+  <url>
+    <loc>https://rulerscale.vercel.app/about</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rulerscale.vercel.app/contact</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rulerscale.vercel.app/privacy</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rulerscale.vercel.app/terms</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://rulerscale.vercel.app/disclaimer</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

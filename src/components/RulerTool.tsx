@@ -11,6 +11,10 @@ interface RulerToolProps {
   calibration: CalibrationData;
   onOpenCalibration: () => void;
   onOpenRealRuler?: () => void;
+  initialUnit?: RulerUnit;
+  initialMode?: RulerMode;
+  pageTitle?: string;
+  pageSubtitle?: string;
 }
 
 type RulerTheme = 'wood' | 'steel' | 'glass' | 'yellow';
@@ -22,11 +26,27 @@ interface CustomGuideline {
   posPx: number;
 }
 
-export default function RulerTool({ calibration, onOpenCalibration, onOpenRealRuler }: RulerToolProps) {
+export default function RulerTool({ 
+  calibration, 
+  onOpenCalibration, 
+  onOpenRealRuler,
+  initialUnit,
+  initialMode,
+  pageTitle,
+  pageSubtitle,
+}: RulerToolProps) {
   // Config state
-  const [unit, setUnit] = useState<RulerUnit>('cm');
+  const [unit, setUnit] = useState<RulerUnit>(initialUnit || 'cm');
   const [activeTheme, setActiveTheme] = useState<RulerTheme>('steel');
-  const [rulerMode, setRulerMode] = useState<RulerMode>('dual');
+  const [rulerMode, setRulerMode] = useState<RulerMode>(initialMode || 'dual');
+
+  useEffect(() => {
+    if (initialUnit) setUnit(initialUnit);
+  }, [initialUnit]);
+
+  useEffect(() => {
+    if (initialMode) setRulerMode(initialMode);
+  }, [initialMode]);
   const [layout, setLayout] = useState<'horizontal' | 'vertical'>('horizontal');
   const [showGuides, setShowGuides] = useState<boolean>(true);
   
@@ -680,10 +700,10 @@ export default function RulerTool({ calibration, onOpenCalibration, onOpenRealRu
       {/* Semantic Page Header for SEO & Clarity */}
       <div className="max-w-4xl mx-auto text-center sm:text-left space-y-1">
         <h1 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-zinc-50 tracking-tight">
-          Accurate Screen Ruler &amp; Online Measurer
+          {pageTitle || 'Accurate Screen Ruler & Online Measurer'}
         </h1>
         <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
-          Precision virtual ruler and screen measure tool calibrated to 100% actual size in cm, mm, and inches.
+          {pageSubtitle || 'Precision virtual ruler and screen measure tool calibrated to 100% actual size in cm, mm, and inches.'}
         </p>
       </div>
 
