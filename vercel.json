@@ -1,5 +1,4 @@
 {
-  "cleanUrls": true,
   "headers": [
     {
       "source": "/sitemap.xml",
@@ -30,7 +29,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!assets/|sitemap.xml|robots.txt|favicon.svg|.*\\.).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
