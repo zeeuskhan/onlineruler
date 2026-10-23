@@ -147,8 +147,8 @@ export default function App() {
       const pageConfig = PAGES_SEO_REGISTRY[currentPath];
       const trustConfig = TRUST_PAGES_CONFIG[currentPath as keyof typeof TRUST_PAGES_CONFIG];
 
-      let newTitle = 'Online Ruler — 100% Accurate Actual Size Screen Ruler';
-      let newDescription = 'Free online ruler with instant credit card calibration. Measure physical objects on your screen in inches, cm, and mm with 100% actual size accuracy.';
+      let newTitle = 'Online Ruler – Actual Size Screen Ruler (cm, mm, inch)';
+      let newDescription = 'Free online ruler showing actual size on any screen. Virtual ruler in cm, mm & inches with calibration, ruler overlay for phone & PC, and screen measure tool.';
 
       if (pageConfig) {
         newTitle = pageConfig.titleVariants[0];
@@ -643,6 +643,7 @@ export default function App() {
           {!isTrustPage && (
             <SeoContentSection
               config={pageConfig}
+              calibration={calibration}
               onOpenCalibration={() => {
                 setShowCalibrationDrawer(true);
                 document.getElementById('calibration-card')?.scrollIntoView({ behavior: 'smooth' });

@@ -40,12 +40,12 @@ export const PAGES_SEO_REGISTRY: Record<string, PageSeoConfig> = {
     searchIntent: 'Transactional & Utility: User needs an instant, zero-install ruler on screen to measure a physical object in inches, centimeters, or millimeters.',
     h1: 'Online Ruler — Accurate Actual Size Screen Measure Tool',
     titleVariants: [
-      'Online Ruler — 100% Accurate Actual Size Screen Ruler',
+      'Online Ruler – Actual Size Screen Ruler (cm, mm, inch)',
       'Free Online Ruler (Actual Size) — Inches, CM & MM Measure',
       'Accurate Online Ruler — True-to-Scale Virtual Measuring Tool'
     ],
     metaVariants: [
-      'Free online ruler with instant credit card calibration. Measure physical objects on your screen in inches, cm, and mm with 100% actual size accuracy.',
+      'Free online ruler showing actual size on any screen. Virtual ruler in cm, mm & inches with calibration, ruler overlay for phone & PC, and screen measure tool.',
       'Accurate online ruler calibrated to your display. Zero downloads needed. Measure in inches, centimeters, and millimeters on laptop or mobile.',
       'Instant online screen ruler. Use card or coin calibration for true 1:1 physical dimensions. Includes calipers, protractor, and mm zoom.'
     ],

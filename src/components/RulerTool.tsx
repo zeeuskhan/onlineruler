@@ -939,9 +939,10 @@ export default function RulerTool({
       {/* Main Ruler Stage canvas wrapper */}
       <div 
         ref={containerRef}
-         onPointerMove={handleContainerPointerMove}
-         onPointerUp={handlePointerUp}
-         onPointerLeave={handleContainerPointerLeave}
+        aria-label="Online ruler in centimeters, millimeters and inches"
+        onPointerMove={handleContainerPointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handleContainerPointerLeave}
         onClick={handleRulerBodyClick}
         className={`relative w-full border rounded-2xl overflow-hidden shadow-md select-none transition-all duration-300 ${
           layout === 'vertical' 

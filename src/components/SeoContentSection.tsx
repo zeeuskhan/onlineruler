@@ -3,26 +3,75 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Ruler, CheckCircle, ChevronDown, ChevronUp, Sparkles, Sliders, 
   ShieldCheck, HelpCircle, Layers, ArrowRight, Laptop, Smartphone, 
   Monitor, Calendar, UserCheck, AlertCircle 
 } from 'lucide-react';
 import { PageSeoConfig, E_E_A_T_AUTHOR } from '../seoData';
+import { CalibrationData } from '../types';
 import AdBanner from './AdBanner';
 
 interface SeoContentSectionProps {
   onOpenCalibration: () => void;
   onOpenRealRuler?: () => void;
   config?: PageSeoConfig;
+  calibration?: CalibrationData;
 }
 
-export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, config }: SeoContentSectionProps) {
+export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, config, calibration }: SeoContentSectionProps) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+  const sizeBarsRef = useRef<HTMLDivElement>(null);
+  const [availableWidth, setAvailableWidth] = useState<number>(650);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (sizeBarsRef.current) {
+        setAvailableWidth(sizeBarsRef.current.clientWidth);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const currentPpi = calibration?.ppi || 96;
+  const pxPerMm = currentPpi / 25.4;
+
+  const mmList = [1, 4, 5, 7, 10];
+  const cmList = [1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 14, 15, 20, 25, 30];
+  const inchList = [1, 1.5, 2, 5, 9, 12];
+
+  const renderSizeBar = (label: string, widthPx: number) => {
+    const isOverflowing = widthPx > availableWidth - 24;
+    return (
+      <div key={label} className="p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-150 dark:border-zinc-700/60 flex flex-col gap-2">
+        <div className="flex items-center justify-between text-xs">
+          <span className="font-bold text-zinc-800 dark:text-zinc-200">{label}</span>
+          <span className="text-[11px] text-zinc-400 font-mono">
+            {Math.round(widthPx)} px {calibration?.calibrated ? '(calibrated)' : '(estimated)'}
+          </span>
+        </div>
+        {isOverflowing ? (
+          <p className="text-xs text-amber-650 dark:text-amber-400 italic py-1">
+            Too wide for this screen. Try landscape mode or a larger display.
+          </p>
+        ) : (
+          <div
+            style={{ width: `${Math.max(2, Math.round(widthPx))}px` }}
+            className="h-4 bg-indigo-600 dark:bg-indigo-500 rounded-xs relative shrink-0 transition-all duration-200"
+          >
+            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-indigo-950 dark:bg-white" />
+            <div className="absolute right-0 top-0 bottom-0 w-0.5 bg-indigo-950 dark:bg-white" />
+          </div>
+        )}
+      </div>
+    );
   };
 
   const defaultFaqs = [
@@ -52,9 +101,57 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
     }
   ];
 
-  const activeFaqs = config?.faqs && config.faqs.length > 0
+  const step7Faqs = [
+    {
+      q: 'How do I get the ruler on my screen?',
+      a: 'Simply visit RuleScale in any modern browser on your phone, tablet, laptop, or desktop. The interactive ruler renders immediately without any downloads, app installations, or extensions. For true 1:1 actual-size measurement, click Calibrate to match your display\'s exact pixel density with a standard debit card or coin.'
+    },
+    {
+      q: 'Can I transform my screen into a ruler?',
+      a: 'Yes. Any glass screen can function as a high-precision physical measuring scale. RuleScale uses calibrated pixels-per-inch (PPI) rendering so on-screen markings match real-world physical centimeters, millimeters, and inches. You can lay small items directly on the glass surface or align items with the edge markings.'
+    },
+    {
+      q: 'Is there a virtual ruler that is 100% accurate?',
+      a: 'A web ruler is only accurate if it accounts for your display\'s unique physical pixel density. While uncalibrated tools guess standard 96 DPI (often causing 10% to 30% error on modern displays), RuleScale provides interactive credit card and coin calibration to guarantee exact 1:1 true-to-scale physical dimensions.'
+    },
+    {
+      q: 'How do I show 1 cm or 1 inch actual size on my screen?',
+      a: 'After calibrating with a bank card or coin, refer to our actual-size reference bars or the main dual ruler scale. The displayed markings for 1 cm and 1 inch correspond to real physical dimensions, allowing you to visually verify physical items directly against the glass.'
+    },
+    {
+      q: 'Can I use this online ruler on my iPhone or Android phone?',
+      a: 'Yes. RuleScale is fully responsive and touch-optimized for mobile browsers including Safari, Chrome, and Firefox on iOS and Android. You can touch and drag Calipers A and B with your fingers or switch between horizontal and vertical orientations.'
+    },
+    {
+      q: 'How does the ruler overlay work on a computer or phone?',
+      a: 'The ruler overlay opens a full-screen viewport display with perimeter edge markings along the top, bottom, and side borders. Because it shares your active DPI calibration, you can align physical paper, envelopes, cards, or on-screen windows directly against the screen borders without losing your place.'
+    },
+    {
+      q: 'What is the difference between screen ruler pixels and physical millimeters?',
+      a: 'Pixels are digital display picture elements whose physical density varies across different monitors and phones (typically 96 PPI on desktop monitors to over 400 PPI on smartphones). Millimeters and inches are fixed physical units. Calibration calculates the exact conversion ratio between your screen\'s pixel grid and physical units.'
+    },
+    {
+      q: 'Can I use this virtual measuring tape without installing an app?',
+      a: 'Yes, RuleScale is 100% browser-based. It requires no downloads from app stores, no software installations, and no permissions. It loads in milliseconds, respects user privacy with zero tracking, and saves your calibration locally in your browser.'
+    },
+    {
+      q: 'How do I measure an object that is longer than my screen?',
+      a: 'For items longer than your active display window, calibrate your screen, measure the first segment up to a known reference point using the calipers, mark the position gently with a sticky note or finger, and slide the item along to measure the remaining segment.'
+    },
+    {
+      q: 'Why is a calibrated screen ruler better than an uncalibrated ruler online?',
+      a: 'Standard uncalibrated web rulers blindly assume 96 DPI, which is rarely correct for modern displays. For instance, a MacBook Retina screen has roughly 227 PPI, so an uncalibrated ruler would appear less than half its real size. Calibration guarantees that 1 physical inch equals exactly 1 inch on your screen.'
+    }
+  ];
+
+  const baseFaqs = config?.faqs && config.faqs.length > 0
     ? config.faqs.map(f => ({ q: f.question, a: f.answer }))
     : defaultFaqs;
+
+  const activeFaqs = [
+    ...baseFaqs,
+    ...step7Faqs.filter(sf => !baseFaqs.some(bf => bf.q.toLowerCase() === sf.q.toLowerCase()))
+  ];
 
   return (
     <article className="max-w-4xl mx-auto space-y-10 text-zinc-700 dark:text-zinc-300 select-normal mt-6">
@@ -77,6 +174,10 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
                 Welcome to <strong>RuleScale</strong>, the web&apos;s most reliable <strong>online ruler</strong> and <strong>screen measure</strong> tool. When you need to measure a physical object but don&apos;t have a tape measure handy, our <strong>virtual ruler</strong> transforms your laptop, desktop monitor, tablet, or smartphone screen into a calibrated, pinpoint-precise physical measuring scale.
               </>
             )}
+          </p>
+
+          <p className="text-sm sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Use it as a virtual ruler, on-screen ruler or digital ruler on your computer, monitor, laptop, phone or tablet, in centimeters, millimeters and inches, at real size once calibrated.
           </p>
 
           {/* Key Advantages Grid */}
@@ -228,6 +329,39 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
         <AdBanner adKey="6b6777c4248ba9b31f1a7f8087ca4b49" format="iframe" height={90} width={728} />
       </section>
 
+      {/* STEP 2: Ruler Overlay Section */}
+      <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-5">
+        <div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 rounded-full text-xs font-bold w-fit mb-2">
+            <Layers className="w-3.5 h-3.5" />
+            <span>Screen Edge Overlay</span>
+          </div>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            Ruler Overlay: Keep a Screen Ruler in View
+          </h2>
+        </div>
+
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          When you want to compare real objects or on-screen dimensions against the edges of your display, launch our full-screen ruler overlay. Clicking the overlay button activates full-bleed edge rulers along the perimeter of your viewport. This functions as a floating screen ruler overlay and lightweight ruler widget, allowing you to gauge physical cards, envelopes, packaging, or digital layouts on your monitor, laptop, or phone without leaving the browser tab.
+        </p>
+
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          The overlay uses the exact same calibrated scale as the main ruler. Any calibration you perform with a bank card or coin is instantly preserved, ensuring that perimeter edge tick marks remain completely true to physical scale in millimeters, centimeters, and fractional inches.
+        </p>
+
+        {onOpenRealRuler && (
+          <div className="pt-1">
+            <button
+              onClick={onOpenRealRuler}
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer inline-flex items-center gap-2"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>Launch Viewport Ruler Overlay</span>
+            </button>
+          </div>
+        )}
+      </section>
+
       {/* SECTION 3: Why Choose an Internet Ruler & Screen Ruler */}
       <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
         <div>
@@ -349,6 +483,180 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
             </span>
             <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
               Measure angles with the 360-degree protractor, study fractional inch fractions, and convert metric units instantly.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* STEP 3: Actual Size Reference Bars Section */}
+      <section ref={sizeBarsRef} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            How Big Is 1 cm, 5 cm or 10 cm on My Screen?
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+            Different phones, tablets, and monitors have unique pixel densities, meaning an uncalibrated screen cannot show true life size. Once you calibrate RuleScale to your display&apos;s actual PPI, the visual bars below represent exact 1:1 physical measurements on your glass. Hold a coin, key, or credit card directly against the bars to verify physical size.
+          </p>
+        </div>
+
+        {/* Group 1: Millimeters */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+            Millimeters on Screen (Actual Size)
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {mmList.map(mm => renderSizeBar(`${mm} mm on screen`, mm * pxPerMm))}
+          </div>
+        </div>
+
+        {/* Group 2: Centimeters */}
+        <div className="space-y-3 pt-2">
+          <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+            Centimeters on Screen (Actual Size)
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {cmList.map(cm => renderSizeBar(`${cm} cm on screen`, (cm * 10) * pxPerMm))}
+          </div>
+        </div>
+
+        {/* Group 3: Inches */}
+        <div className="space-y-3 pt-2">
+          <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+            Inches on Screen (Actual Size)
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {inchList.map(inch => renderSizeBar(`${inch} ${inch === 1 ? 'inch' : 'inches'} on screen`, inch * currentPpi))}
+          </div>
+        </div>
+      </section>
+
+      {/* STEP 4: Devices Section */}
+      <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            Online Ruler for Phone, Tablet, Laptop and Desktop
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+            RuleScale adapts dynamically to any hardware profile. Whether you are using a mobile browser on the go or working at a multi-monitor desktop station, here is how each device configuration excels:
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-2">
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+              <Smartphone className="w-4 h-4" />
+              <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+                Phone &amp; Mobile Ruler (iPhone &amp; Android)
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Your smartphone is always with you. Open RuleScale on your mobile browser (Safari, Chrome, or Firefox) to turn your phone screen into a pocket measuring scale. Rest small items gently against the glass and drag caliper handles with your thumb. Rotate your phone to landscape mode when measuring objects up to 15 cm in length.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-2">
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+              <Laptop className="w-4 h-4" />
+              <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+                Tablet &amp; iPad Ruler
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              An iPad or Android tablet offers an expansive, flat glass surface perfect for larger physical objects. Use it as a digital measuring surface for craft projects, leatherwork, jewelry sizing, and homework geometry without needing a traditional wooden ruler.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-2">
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+              <Laptop className="w-4 h-4" />
+              <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+                Laptop &amp; MacBook Ruler
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              MacBook Retina displays and modern Windows laptops feature high pixel densities (often 128 to 227+ PPI). Calibrating your laptop screen with an ID card compensates for operating system scaling, ensuring exact 1:1 true-to-life centimeter and inch markings.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-2">
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+              <Monitor className="w-4 h-4" />
+              <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+                Desktop Monitor &amp; PC Ruler (1920x1080 and 4K Displays)
+              </h3>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Standard 24-inch or 27-inch 1080p and 4K monitors provide ample horizontal space to span a full 12-inch or 30-cm scale. Use the precision calipers or toggle to Pixel mode when inspecting web UI elements, icons, and graphic layouts.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* STEP 5: Virtual Measuring Tape Section */}
+      <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-5">
+        <div>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            Virtual Measuring Tape and Screen Measurement Tool
+          </h2>
+        </div>
+
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          RuleScale functions as a browser-based virtual measuring tape and interactive screen measurement tool. Instead of guessing lengths against a static image, you have access to two interactive caliper sliders: Caliper A and Caliper B. Slide Marker A to the initial edge of your object and Marker B to the opposite edge. The tool calculates the delta distance between markers with sub-millimeter precision.
+        </p>
+
+        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          Both metric (millimeters and centimeters) and imperial (inches and fractional 16ths) readouts are updated continuously in real time. When you are finished, tap the copy button to transfer the exact measurement straight to your clipboard, streamlining workflows for online shopping, 3D printing prep, envelope sizing, and crafting.
+        </p>
+      </section>
+
+      {/* STEP 6: Units Section */}
+      <section className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
+        <div>
+          <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            Online Ruler in cm, mm and Inches
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+            Switch effortlessly between international metric units and US customary imperial units to suit any project requirements:
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-1.5">
+            <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+              Centimeter Ruler Online (cm)
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Every major centimeter mark is clearly labeled with 0.5 cm mid-ticks for rapid visual reading. Ideal for school assignments, stationery sizing, and everyday metric checks.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-1.5">
+            <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+              Millimeter Ruler Online (mm)
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Features continuous 1 mm subdivisions for engineering-grade precision. Perfect for measuring small screws, drill bits, watch bands, and coin diameters directly against your screen.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-1.5">
+            <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+              Online Ruler in Inches
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Provides traditional 1/16-inch fractional tick marks alongside decimal equivalents. Quickly identify 1/8&quot;, 1/4&quot;, 3/8&quot;, 1/2&quot;, 5/8&quot;, 3/4&quot;, and 7/8&quot; without doing mental arithmetic.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-100 dark:border-zinc-800 space-y-1.5">
+            <h3 className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+              Vertical and Horizontal Screen Ruler Orientations
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Toggle orientation with a single click. Use horizontal mode for long items across your desk, or switch to vertical mode to align tall objects comfortably along the side of your monitor or tablet.
             </p>
           </div>
         </div>
@@ -483,6 +791,11 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
           })}
         </div>
       </section>
+
+      {/* STEP 8: Multilingual Discovery Line */}
+      <p className="text-xs text-zinc-400 dark:text-zinc-500 text-center leading-relaxed select-none">
+        Available worldwide: online ruler / <span lang="fr">règle en ligne, règle graduée en ligne, règle sur écran</span> / <span lang="ru">линейка онлайн (см)</span> / <span lang="sv">linjal online, linjal på skärmen</span> / <span lang="nl">meetlat op scherm</span> / <span lang="tr">sanal cetvel</span>
+      </p>
 
       {/* SECTION 8: Call to Action Bar */}
       <section className="bg-gradient-to-r from-indigo-700 via-indigo-800 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 text-center space-y-4 shadow-lg">
