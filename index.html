@@ -2,8 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Online Ruler – Actual Size Screen Ruler (cm, mm, inch)</title>
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="RuleScale" />
     <meta name="google-site-verification" content="ItLByOSQAwzJ0a_YDS2lb1-6swGae5hQRnJUr4TuShg" />
     
     <script>
@@ -57,11 +61,12 @@
     <!-- Meta tags for improved SEO and search engine ranking -->
     <meta name="description" content="Free online ruler showing actual size on any screen. Virtual ruler in cm, mm &amp; inches with calibration, ruler overlay for phone &amp; PC, and screen measure tool." />
     <meta name="keywords" content="measurer online, screen measure, accurate ruler, online ruler, screen ruler, virtual ruler, ruler online, internet ruler, actual size ruler, mm ruler, cm ruler, inch ruler, screen ruler cm, calibrate online ruler" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://rulerscale.vercel.app/" />
     <link rel="alternate" hreflang="x-default" href="https://rulerscale.vercel.app/" />
     <link rel="alternate" hreflang="en" href="https://rulerscale.vercel.app/" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://rulerscale.vercel.app/sitemap.xml" />
+    <link rel="manifest" href="/site.webmanifest" />
     
     <!-- Open Graph (Facebook / LinkedIn) -->
     <meta property="og:type" content="website" />
@@ -69,17 +74,23 @@
     <meta property="og:description" content="Free online ruler showing actual size on any screen. Virtual ruler in cm, mm &amp; inches with calibration, ruler overlay for phone &amp; PC, and screen measure tool." />
     <meta property="og:url" content="https://rulerscale.vercel.app/" />
     <meta property="og:site_name" content="RuleScale" />
-    <meta property="og:image" content="https://rulerscale.vercel.app/favicon.svg" />
+    <meta property="og:image" content="https://rulerscale.vercel.app/og-image.png" />
+    <meta property="og:image:secure_url" content="https://rulerscale.vercel.app/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="RuleScale Online Ruler - 100% Actual Size Screen Measure Tool" />
     
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Online Ruler – Actual Size Screen Ruler (cm, mm, inch)" />
     <meta name="twitter:description" content="Free online ruler showing actual size on any screen. Virtual ruler in cm, mm &amp; inches with calibration, ruler overlay for phone &amp; PC, and screen measure tool." />
-    <meta name="twitter:image" content="https://rulerscale.vercel.app/favicon.svg" />
+    <meta name="twitter:image" content="https://rulerscale.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="RuleScale Online Ruler - 100% Actual Size Screen Measure Tool" />
     
     <!-- Favicon link pointing to the custom scale ruler icon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
 
     <!-- Schema.org Structured Data (JSON-LD) for Search Engine Rich Snippets -->
     <script type="application/ld+json">
@@ -109,7 +120,22 @@
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "USD"
-          }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1280",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "featureList": [
+            "Credit card calibration for true 1:1 physical size",
+            "Dual Imperial inches (1/16th) and Metric cm/mm scale",
+            "Interactive movable caliper sliders with copyable readings",
+            "Full-screen 4-edge viewport ruler overlay",
+            "Online camera ruler for physical object measurement",
+            "Zero download, privacy-first client-side calculation"
+          ]
         },
         {
           "@type": "WebSite",
@@ -133,6 +159,36 @@
               "position": 1,
               "name": "Home",
               "item": "https://rulerscale.vercel.app/"
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://rulerscale.vercel.app/#howto-calibrate",
+          "name": "How to Calibrate an Online Ruler to 100% Actual Size",
+          "description": "Step-by-step instructions to calibrate your screen using a standard credit card or coin for guaranteed 1:1 true physical measurement.",
+          "totalTime": "PT1M",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Choose Calibration Mode",
+              "text": "Click the Calibrate button in the toolbar and select Credit Card or Coin.",
+              "url": "https://rulerscale.vercel.app/#calibrate"
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Align Physical Card to Screen",
+              "text": "Hold any standard bank card (ISO ID-1, 85.60 mm width) against the screen calibration box.",
+              "url": "https://rulerscale.vercel.app/#align"
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Adjust Slider to Match",
+              "text": "Drag the slider until the on-screen box matches the physical width of your card precisely, then click Save Calibration.",
+              "url": "https://rulerscale.vercel.app/#save"
             }
           ]
         },

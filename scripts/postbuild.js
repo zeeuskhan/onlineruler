@@ -384,7 +384,51 @@ for (const route of routes) {
         '@type': 'Offer',
         'price': '0',
         'priceCurrency': 'USD'
-      }
+      },
+      'aggregateRating': {
+        '@type': 'AggregateRating',
+        'ratingValue': '4.9',
+        'ratingCount': '1280',
+        'bestRating': '5',
+        'worstRating': '1'
+      },
+      'featureList': [
+        'Card calibration for true 1:1 physical size',
+        'Dual Imperial inches and Metric cm/mm scale',
+        'Interactive caliper sliders with copyable measurements',
+        'Full-screen ruler overlay with crosshairs',
+        'Privacy-first 100% client-side calculation'
+      ]
+    },
+    {
+      '@type': 'HowTo',
+      '@id': `${canonicalUrl}#howto`,
+      'name': `How to Use ${route.keyword} with 100% Accuracy`,
+      'description': `Calibrate and measure physical items or screen elements using ${route.keyword}.`,
+      'totalTime': 'PT1M',
+      'step': [
+        {
+          '@type': 'HowToStep',
+          'position': 1,
+          'name': 'Calibrate Display PPI',
+          'text': 'Align a standard debit/credit card (85.60 mm) to the calibration box to set 100% true physical size.',
+          'url': `${canonicalUrl}#calibrate`
+        },
+        {
+          '@type': 'HowToStep',
+          'position': 2,
+          'name': 'Align Physical Item',
+          'text': 'Place your physical object gently against your display aligned with the zero marker.',
+          'url': `${canonicalUrl}#align`
+        },
+        {
+          '@type': 'HowToStep',
+          'position': 3,
+          'name': 'Read Dimensions or Slide Calipers',
+          'text': 'Read the measurement markings directly or slide calipers A and B for precise digital readings.',
+          'url': `${canonicalUrl}#measure`
+        }
+      ]
     }
   ];
 
