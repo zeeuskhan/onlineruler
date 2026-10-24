@@ -126,9 +126,9 @@ export default function CameraRuler({ calibration, onOpenCalibration }: CameraRu
             <Camera className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-sm sm:text-base font-extrabold text-zinc-900 dark:text-zinc-100">
-              Live Camera Ruler &amp; AR Measurement Overlay
-            </h2>
+            <h1 className="text-base sm:text-xl font-extrabold text-zinc-900 dark:text-zinc-100">
+              Online Ruler Camera — Live Screen &amp; Camera Measurement
+            </h1>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5 leading-relaxed">
               Point your phone camera or webcam at any object. Use interactive calipers over the live feed. All video runs <strong>100% on-device</strong> with zero uploads.
             </p>
