@@ -9,7 +9,7 @@ import {
   ShieldCheck, HelpCircle, Layers, ArrowRight, Laptop, Smartphone, 
   Monitor, Calendar, UserCheck, AlertCircle 
 } from 'lucide-react';
-import { PageSeoConfig, E_E_A_T_AUTHOR } from '../seoData';
+import { PageSeoConfig, E_E_A_T_AUTHOR, getFullPageFaqs } from '../seoData';
 import { CalibrationData } from '../types';
 import AdBanner from './AdBanner';
 
@@ -74,84 +74,8 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
     );
   };
 
-  const defaultFaqs = [
-    {
-      q: 'How does an online ruler measure actual size on my screen?',
-      a: 'A standard computer monitor or smartphone display consists of pixels per inch (PPI). Because screen resolutions and physical sizes vary across devices, an uncalibrated digital scale might show 1 inch smaller or larger than reality. RuleScale solves this by letting you calibrate with a standard bank card (85.60 mm) or coin. Once calibrated, our virtual ruler produces 100% true-to-scale physical millimeter, centimeter, and inch measurements on your glass display.'
-    },
-    {
-      q: 'What is a screen measure tool and how do I use it?',
-      a: 'A screen measure tool is an interactive digital measuring instrument designed to measure physical items placed directly on your display or measure digital graphics in pixels. You simply place an object (like a key, screw, credit card, or jewelry) gently against your screen and slide the interactive calipers (Marker A and Marker B) to capture the exact length, width, or thickness.'
-    },
-    {
-      q: 'What makes this an accurate ruler compared to standard web rulers?',
-      a: 'Most web rulers assume a fixed 96 DPI, which is often inaccurate on modern high-density screens like MacBook Retina displays (227-254 PPI) or 4K monitors. Our accurate ruler includes dynamic PPI calibration, pre-configured hardware profiles (MacBook, iPad, iPhone, Dell, Samsung), and millimeter subdivision zooming to guarantee 1:1 physical accuracy.'
-    },
-    {
-      q: 'Can I use this internet ruler without downloading or installing any software?',
-      a: 'Yes! RuleScale is a zero-install internet ruler and web-based measurer online. It runs instantly inside any modern web browser on Windows, macOS, Linux, iOS, and Android. It requires no app store downloads, extensions, or account sign-ups, providing instant access whenever you need a ruler online.'
-    },
-    {
-      q: 'Can I measure in both metric (cm/mm) and imperial (inches)?',
-      a: 'Absolutely. The virtual ruler offers a Dual Mode displaying metric centimeters and millimeters on the top scale alongside imperial fractions (1/16th inch resolution) on the bottom scale. You can also switch directly to dedicated Centimeter, Inch, or Pixel modes with a single click.'
-    },
-    {
-      q: 'Is it safe to place physical items on my smartphone or laptop screen?',
-      a: 'Yes, modern glass screens on smartphones, tablets, and laptops are protected by hardened scratch-resistant glass (such as Gorilla Glass). Simply place small items gently on the flat surface without pressing down hard, or hold the item parallel to the screen markings.'
-    }
-  ];
-
-  const step7Faqs = [
-    {
-      q: 'How do I get the ruler on my screen?',
-      a: 'Simply visit RuleScale in any modern browser on your phone, tablet, laptop, or desktop. The interactive ruler renders immediately without any downloads, app installations, or extensions. For true 1:1 actual-size measurement, click Calibrate to match your display\'s exact pixel density with a standard debit card or coin.'
-    },
-    {
-      q: 'Can I transform my screen into a ruler?',
-      a: 'Yes. Any glass screen can function as a high-precision physical measuring scale. RuleScale uses calibrated pixels-per-inch (PPI) rendering so on-screen markings match real-world physical centimeters, millimeters, and inches. You can lay small items directly on the glass surface or align items with the edge markings.'
-    },
-    {
-      q: 'Is there a virtual ruler that is 100% accurate?',
-      a: 'A web ruler is only accurate if it accounts for your display\'s unique physical pixel density. While uncalibrated tools guess standard 96 DPI (often causing 10% to 30% error on modern displays), RuleScale provides interactive credit card and coin calibration to guarantee exact 1:1 true-to-scale physical dimensions.'
-    },
-    {
-      q: 'How do I show 1 cm or 1 inch actual size on my screen?',
-      a: 'After calibrating with a bank card or coin, refer to our actual-size reference bars or the main dual ruler scale. The displayed markings for 1 cm and 1 inch correspond to real physical dimensions, allowing you to visually verify physical items directly against the glass.'
-    },
-    {
-      q: 'Can I use this online ruler on my iPhone or Android phone?',
-      a: 'Yes. RuleScale is fully responsive and touch-optimized for mobile browsers including Safari, Chrome, and Firefox on iOS and Android. You can touch and drag Calipers A and B with your fingers or switch between horizontal and vertical orientations.'
-    },
-    {
-      q: 'How does the ruler overlay work on a computer or phone?',
-      a: 'The ruler overlay opens a full-screen viewport display with perimeter edge markings along the top, bottom, and side borders. Because it shares your active DPI calibration, you can align physical paper, envelopes, cards, or on-screen windows directly against the screen borders without losing your place.'
-    },
-    {
-      q: 'What is the difference between screen ruler pixels and physical millimeters?',
-      a: 'Pixels are digital display picture elements whose physical density varies across different monitors and phones (typically 96 PPI on desktop monitors to over 400 PPI on smartphones). Millimeters and inches are fixed physical units. Calibration calculates the exact conversion ratio between your screen\'s pixel grid and physical units.'
-    },
-    {
-      q: 'Can I use this virtual measuring tape without installing an app?',
-      a: 'Yes, RuleScale is 100% browser-based. It requires no downloads from app stores, no software installations, and no permissions. It loads in milliseconds, respects user privacy with zero tracking, and saves your calibration locally in your browser.'
-    },
-    {
-      q: 'How do I measure an object that is longer than my screen?',
-      a: 'For items longer than your active display window, calibrate your screen, measure the first segment up to a known reference point using the calipers, mark the position gently with a sticky note or finger, and slide the item along to measure the remaining segment.'
-    },
-    {
-      q: 'Why is a calibrated screen ruler better than an uncalibrated ruler online?',
-      a: 'Standard uncalibrated web rulers blindly assume 96 DPI, which is rarely correct for modern displays. For instance, a MacBook Retina screen has roughly 227 PPI, so an uncalibrated ruler would appear less than half its real size. Calibration guarantees that 1 physical inch equals exactly 1 inch on your screen.'
-    }
-  ];
-
-  const baseFaqs = config?.faqs && config.faqs.length > 0
-    ? config.faqs.map(f => ({ q: f.question, a: f.answer }))
-    : defaultFaqs;
-
-  const activeFaqs = [
-    ...baseFaqs,
-    ...step7Faqs.filter(sf => !baseFaqs.some(bf => bf.q.toLowerCase() === sf.q.toLowerCase()))
-  ];
+  const fullFaqs = getFullPageFaqs(config);
+  const activeFaqs = fullFaqs.map(f => ({ q: f.question, a: f.answer }));
 
   return (
     <article className="max-w-4xl mx-auto space-y-10 text-zinc-700 dark:text-zinc-300 select-normal mt-6">

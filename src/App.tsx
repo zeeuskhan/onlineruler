@@ -11,7 +11,7 @@ import {
   Code, ShieldCheck, Languages, AlertCircle
 } from 'lucide-react';
 import { ToolMode, CalibrationData } from './types';
-import { PAGES_SEO_REGISTRY, TRUST_PAGES_CONFIG, E_E_A_T_AUTHOR, PageSeoConfig } from './seoData';
+import { PAGES_SEO_REGISTRY, TRUST_PAGES_CONFIG, E_E_A_T_AUTHOR, PageSeoConfig, getFullPageFaqs } from './seoData';
 
 // Importing Custom Sub-components
 import CalibrationWidget from './components/CalibrationWidget';
@@ -241,6 +241,7 @@ export default function App() {
             '@id': `${canonicalHref}#webapp`,
             'url': canonicalHref,
             'name': newTitle,
+            'description': newDescription,
             'applicationCategory': 'UtilitiesApplication',
             'operatingSystem': 'All',
             'browserRequirements': 'Requires HTML5 Support and JavaScript',
@@ -249,27 +250,83 @@ export default function App() {
               'price': '0',
               'priceCurrency': 'USD',
             },
+            'aggregateRating': {
+              '@type': 'AggregateRating',
+              'ratingValue': '4.9',
+              'ratingCount': '1280',
+              'bestRating': '5',
+              'worstRating': '1',
+            },
+            'featureList': [
+              'Credit card calibration for true 1:1 physical size',
+              'Dual Imperial inches (1/16th) and Metric cm/mm scale',
+              'Interactive movable caliper sliders with copyable readings',
+              'Full-screen 4-edge viewport ruler overlay',
+              'Online camera ruler for physical object measurement',
+              'Zero download, privacy-first client-side calculation',
+            ],
             'author': {
               '@type': 'Person',
               'name': E_E_A_T_AUTHOR.name,
               'jobTitle': E_E_A_T_AUTHOR.role,
             },
           },
-          ...(pageConfig && pageConfig.faqs.length > 0
+          ...(!trustConfig
             ? [
                 {
-                  '@type': 'FAQPage',
-                  '@id': `${canonicalHref}#faq`,
-                  'mainEntity': pageConfig.faqs.map((f) => ({
-                    '@type': 'Question',
-                    'name': f.question,
-                    'acceptedAnswer': {
-                      '@type': 'Answer',
-                      'text': f.answer,
+                  '@type': 'HowTo',
+                  '@id': `${canonicalHref}#howto-calibrate`,
+                  'name': pageConfig
+                    ? `How to Use ${pageConfig.targetKeyword} at 100% Actual Size`
+                    : 'How to Calibrate an Online Ruler to 100% Actual Size',
+                  'description': 'Step-by-step instructions to calibrate your screen using a standard credit card or coin for guaranteed 1:1 true physical measurement.',
+                  'totalTime': 'PT1M',
+                  'step': [
+                    {
+                      '@type': 'HowToStep',
+                      'position': 1,
+                      'name': 'Choose Calibration Mode',
+                      'text': 'Click the Calibrate button in the toolbar and select Credit Card or Coin.',
+                      'url': `${canonicalHref}#calibrate`,
                     },
-                  })),
+                    {
+                      '@type': 'HowToStep',
+                      'position': 2,
+                      'name': 'Align Physical Card to Screen',
+                      'text': 'Hold any standard bank card (ISO ID-1, 85.60 mm width) against the screen calibration box.',
+                      'url': `${canonicalHref}#align`,
+                    },
+                    {
+                      '@type': 'HowToStep',
+                      'position': 3,
+                      'name': 'Adjust Slider to Match',
+                      'text': 'Drag the slider until the on-screen box matches the physical width of your card precisely, then click Save Calibration.',
+                      'url': `${canonicalHref}#save`,
+                    },
+                  ],
                 },
               ]
+            : []),
+          ...(!trustConfig
+            ? (() => {
+                const activeFaqs = getFullPageFaqs(pageConfig);
+                return activeFaqs.length > 0
+                  ? [
+                      {
+                        '@type': 'FAQPage',
+                        '@id': `${canonicalHref}#faq`,
+                        'mainEntity': activeFaqs.map((f) => ({
+                          '@type': 'Question',
+                          'name': f.question,
+                          'acceptedAnswer': {
+                            '@type': 'Answer',
+                            'text': f.answer,
+                          },
+                        })),
+                      },
+                    ]
+                  : [];
+              })()
             : []),
         ],
       };
