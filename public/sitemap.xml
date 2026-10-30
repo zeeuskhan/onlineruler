@@ -31,14 +31,7 @@
   <!-- Actual Size Ruler Spoke -->
   <url>
     <loc>https://rulerscale.vercel.app/actual-size-ruler</loc>
-    <lastmod>2026-10-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <!-- Real Online Ruler Spoke (Targeting Exact-Match Query) -->
-  <url>
-    <loc>https://rulerscale.vercel.app/real-online-ruler</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

@@ -109,27 +109,6 @@ const routes = [
     ]
   },
   {
-    path: '/real-online-ruler',
-    title: 'Real Online Ruler — 100% Actual Size Screen Ruler (Calibrated)',
-    desc: 'Real online ruler calibrated to 100% actual physical size on any screen. Measure real objects in cm, mm & inches with card calibration. Free & instant.',
-    h1: 'Real Online Ruler — Calibrated 1:1 Actual Size Screen Measure',
-    keyword: 'Real Online Ruler',
-    faqs: [
-      {
-        q: 'What is a real online ruler?',
-        a: 'A real online ruler is a calibrated web measuring tool that matches true physical real-world centimeters, millimeters, and inches on your display glass once adjusted for your device\'s pixels per inch (PPI).'
-      },
-      {
-        q: 'How do I make an online ruler show real actual size?',
-        a: 'Simply align any standard debit or credit card (exactly 85.60 mm wide according to ISO/IEC 7810) with the on-screen card guide to lock in your display\'s exact DPI.'
-      },
-      {
-        q: 'How does a real online ruler compare to a physical plastic ruler?',
-        a: 'When calibrated, holding a physical plastic or wooden ruler against the screen shows an exact 1:1 match across all millimeter and inch markings, with the added benefit of digital caliper sliders.'
-      }
-    ]
-  },
-  {
     path: '/screen-ruler',
     title: 'Screen Ruler — Measure Screen Elements & Physical Items Online',
     desc: 'Versatile screen ruler for measuring on-display graphics and physical objects. Switch between pixels, cm, mm, and inches. Free, zero downloads.',

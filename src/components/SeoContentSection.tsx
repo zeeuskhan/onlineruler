@@ -95,13 +95,13 @@ export default function SeoContentSection({ onOpenCalibration, onOpenRealRuler, 
           <p className="text-sm sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
             {config?.summary || (
               <>
-                Welcome to <strong>RuleScale</strong>, the web&apos;s most reliable <strong>online ruler</strong> and <strong>real online ruler</strong> measuring tool. When you need to measure a physical object but don&apos;t have a tape measure handy, our <strong>virtual ruler</strong> transforms your laptop, desktop monitor, tablet, or smartphone screen into a calibrated, pinpoint-precise physical measuring scale.
+                Welcome to <strong>RuleScale</strong>, the web&apos;s most reliable <strong>online ruler</strong> and <strong>screen measure</strong> tool. When you need to measure a physical object but don&apos;t have a tape measure handy, our <strong>virtual ruler</strong> transforms your laptop, desktop monitor, tablet, or smartphone screen into a calibrated, pinpoint-precise physical measuring scale.
               </>
             )}
           </p>
 
           <p className="text-sm sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Use it as a real online ruler, on-screen ruler, or digital ruler on your computer, monitor, laptop, phone, or tablet in centimeters, millimeters, and inches at 100% actual real size once calibrated.
+            Use it as a virtual ruler, on-screen ruler or digital ruler on your computer, monitor, laptop, phone or tablet, in centimeters, millimeters and inches, at real size once calibrated.
           </p>
 
           {/* Key Advantages Grid */}

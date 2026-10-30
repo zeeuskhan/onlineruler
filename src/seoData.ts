@@ -122,22 +122,22 @@ export const PAGES_SEO_REGISTRY: Record<string, PageSeoConfig> = {
   '/': {
     slug: '/',
     targetKeyword: 'online ruler',
-    searchIntent: 'Transactional & Utility: User needs an instant, zero-install ruler on screen to measure a physical object in inches, centimeters, or millimeters at real size.',
-    h1: 'Online Ruler — Real Online Ruler at 100% Actual Size (cm, mm, inch)',
+    searchIntent: 'Transactional & Utility: User needs an instant, zero-install ruler on screen to measure a physical object in inches, centimeters, or millimeters.',
+    h1: 'Online Ruler — Actual Size On-Screen Ruler to Scale',
     titleVariants: [
-      'Online Ruler — Real Online Ruler at 100% Actual Size',
-      'Real Online Ruler (Actual Size) — Inches, CM & MM Screen Ruler',
-      'Online Ruler — 100% Calibrated Real Online Screen Ruler'
+      'Online Ruler – Actual Size Screen Ruler to Scale (cm, inch)',
+      'Online Ruler (Actual Size) — Calibrated Screen Measure Tool',
+      'Accurate Online Ruler — True-to-Scale Virtual Screen Ruler'
     ],
     metaVariants: [
-      'Free online ruler calibrated to your screen. Use our real online ruler to measure in cm, mm & inches at 100% actual size. Accurate, instant, and 100% free.',
-      'Accurate real online ruler calibrated to your screen PPI. Zero downloads needed. Measure in inches, centimeters, and millimeters on laptop or mobile.',
-      'Instant online ruler and real screen measure tool. Use card or coin calibration for true 1:1 physical dimensions with interactive calipers.'
+      'Free online ruler showing actual size to scale on any screen. Calibrated on-screen digital ruler for phone & PC in cm, mm and inches. Zero install.',
+      'Calibrated online ruler showing 100% actual physical size to scale. Measure in centimeters, millimeters, and inches on any phone or laptop screen.',
+      'Accurate on-screen digital ruler with card calibration. Free virtual ruler to scale for measuring objects directly on your computer or mobile screen.'
     ],
     defaultUnit: 'cm',
     defaultMode: 'dual',
     toolType: 'ruler',
-    summary: 'RuleScale is a free online ruler and real online ruler that displays 100% true-to-scale physical measurements on your screen in centimeters, millimeters, and inches.',
+    summary: 'RuleScale is a free online ruler providing 100% actual size measurements to scale. Measure physical items in cm, mm, and inches with instant credit card calibration.',
     contentSections: [
       {
         heading: 'How to Calibrate Your Online Ruler for 100% Actual Size',
@@ -396,66 +396,6 @@ export const PAGES_SEO_REGISTRY: Record<string, PageSeoConfig> = {
       {
         question: 'Why does my screen need calibration for actual size?',
         answer: 'Operating systems and web browsers don\'t always know the exact diagonal size of external monitors or high-DPI panels. Calibrating with a card provides an infallible physical benchmark.'
-      }
-    ]
-  },
-
-  '/real-online-ruler': {
-    slug: '/real-online-ruler',
-    targetKeyword: 'real online ruler',
-    searchIntent: 'High-Intent Utility: Users explicitly searching for a "real online ruler" that provides genuine 1:1 true-to-scale physical measurement on computer monitors and smartphone screens.',
-    h1: 'Real Online Ruler — 100% Actual Size Screen Ruler (Calibrated)',
-    titleVariants: [
-      'Real Online Ruler — 100% Actual Size Calibrated Screen Ruler',
-      'Real Online Ruler (Actual Size) — Free 1:1 Measuring Tool',
-      'Accurate Real Online Ruler — Calibrated CM, MM & Inches'
-    ],
-    metaVariants: [
-      'Looking for a real online ruler? Calibrate to 100% actual physical size with a credit card. Measure objects in cm, mm & inches on any screen. Free.',
-      'Free real online ruler calibrated to your monitor or phone. True-to-scale 1:1 measurement in centimeters, millimeters, and inches with zero downloads.',
-      'Instant real online ruler showing true physical dimensions on your display glass. Slide movable calipers to measure small objects with precision.'
-    ],
-    defaultUnit: 'cm',
-    defaultMode: 'dual',
-    toolType: 'ruler',
-    summary: 'RuleScale provides an authentic real online ruler that matches genuine physical measuring tape dimensions once calibrated against any standard bank card.',
-    contentSections: [
-      {
-        heading: 'What Makes This a Real Online Ruler?',
-        body: [
-          'Most web pages claiming to be an "online ruler" merely display a static graphic or CSS image that blindly assumes 96 DPI. On a modern MacBook Retina display (227 PPI) or 4K monitor, those fake rulers are off by up to 40%!',
-          'A true real online ruler calculates the exact physical pixel density of your monitor glass. By matching our digital guide to any standard debit or credit card (exactly 85.60 mm wide according to ISO/IEC 7810 ID-1), RuleScale mathematically locks 1 inch on screen to 1 physical inch in the real world.'
-        ]
-      },
-      {
-        heading: 'How to Use a Real Online Ruler on Your Screen',
-        body: [
-          '1. Calibrate Your Display: Click the calibration gear and align the on-screen card guide with your physical debit/credit card or coin.',
-          '2. Place Your Item Against the Glass: Gently rest your screw, jewelry, watch band, or paper craft against the display markings.',
-          '3. Measure with High Precision: Read direct markings in centimeters, millimeters, or fractional inches, or slide Calipers A and B to span the item and copy the measurement.'
-        ]
-      },
-      {
-        heading: 'Why Real Online Rulers Beat Tape Measures for Small Items',
-        body: [
-          '• Zero Parallax Error: Laying small parts like screws, drill bits, or SIM cards directly on the flat screen glass eliminates parallax viewing angles.',
-          '• Digital Vernier Readouts: Interactive calipers give pinpoint sub-millimeter precision without squinting at blurry tape markings.',
-          '• Dual Metric & Imperial: View centimeters and fractional inches simultaneously, with instant one-click copying to your clipboard.'
-        ]
-      }
-    ],
-    faqs: [
-      {
-        question: 'Is this real online ruler 100% accurate?',
-        answer: 'Yes. Once calibrated using a standard bank card (85.60 mm) or coin, 1 cm and 1 inch on screen match a certified physical workshop ruler with 100% true-to-scale physical accuracy.'
-      },
-      {
-        question: 'How do I know this is a real online ruler and not just a picture?',
-        answer: 'Unlike static images, RuleScale uses hardware PPI calibration matrices and vector SVG coordinate math. You can verify this by holding any physical classroom ruler or measuring tape against the screen—the ticks line up perfectly.'
-      },
-      {
-        question: 'Can I use this real online ruler on iPhone, Android, or laptops?',
-        answer: 'Yes. The real online ruler works across all desktop computers, laptops, iPads, tablets, and smartphones without installing any apps or extensions.'
       }
     ]
   },
