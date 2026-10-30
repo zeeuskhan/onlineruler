@@ -539,6 +539,7 @@ export default function App() {
             <div className="flex gap-1.5 min-w-[780px] pb-1">
               {[
                 { path: '/', label: 'Online Ruler', icon: <Ruler className="w-4 h-4" /> },
+                { path: '/real-online-ruler', label: 'Real Online Ruler', icon: <Sliders className="w-4 h-4 text-orange-500" /> },
                 { path: '/online-ruler-inches', label: 'Inches (1/16")', icon: <Ruler className="w-4 h-4 text-indigo-500" /> },
                 { path: '/online-ruler-cm', label: 'Centimeters (CM)', icon: <Ruler className="w-4 h-4 text-emerald-500" /> },
                 { path: '/online-ruler-mm', label: 'Millimeters (MM)', icon: <Ruler className="w-4 h-4 text-teal-500" /> },
@@ -663,8 +664,8 @@ export default function App() {
                 onOpenRealRuler={() => setShowFullRuler(true)}
                 initialUnit={pageConfig ? pageConfig.defaultUnit : 'cm'}
                 initialMode={pageConfig ? pageConfig.defaultMode : 'dual'}
-                pageTitle={pageConfig ? pageConfig.h1 : 'Online Ruler — Actual Size On-Screen Ruler to Scale'}
-                pageSubtitle={pageConfig ? pageConfig.summary : 'Free online ruler providing 100% actual size measurements to scale with instant credit card calibration.'}
+                pageTitle={pageConfig ? pageConfig.h1 : 'Online Ruler — Accurate Actual Size Screen Measure Tool'}
+                pageSubtitle={pageConfig ? pageConfig.summary : 'Calibrated 100% true-to-scale physical screen ruler in inches, centimeters, and millimeters.'}
               />
             )}
           </section>
@@ -736,6 +737,11 @@ export default function App() {
             <div className="md:col-span-3 space-y-2.5">
               <strong className="text-zinc-850 dark:text-zinc-250 font-bold block">Units &amp; Precision Spokes:</strong>
               <ul className="space-y-1.5 text-zinc-500 dark:text-zinc-400">
+                <li>
+                  <a href="/real-online-ruler" onClick={(e) => { e.preventDefault(); navigateTo('/real-online-ruler'); }} className="text-orange-600 dark:text-orange-400 font-extrabold hover:underline">
+                    • Real Online Ruler (100% Scale)
+                  </a>
+                </li>
                 <li>
                   <a href="/online-ruler-inches" onClick={(e) => { e.preventDefault(); navigateTo('/online-ruler-inches'); }} className="hover:text-indigo-600 dark:hover:text-indigo-400">
                     • Online Ruler in Inches (1/16&quot;)
